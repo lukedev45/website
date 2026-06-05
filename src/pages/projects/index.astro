@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { SITE_TITLE } from '../../consts';
+import { getProjects } from '../../utils';
+
+const projects = await getProjects();
+---
+
+<BaseLayout title={`Projects · ${SITE_TITLE}`} description="Things I’ve built.">
+	<h1>Projects</h1>
+	{
+		projects.length === 0 ? (
+			<p class="muted">No projects yet.</p>
+		) : (
+			projects.map((project) => <ProjectCard project={project} />)
+		)
+	}
+</BaseLayout>

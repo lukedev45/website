@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+import { slugifyTag, withBase } from '../utils';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, tags } = post.data;
+---
+
+<article class="post-card">
+	<h3 class="post-card-title">
+		<a href={withBase(`/blog/${post.id}/`)}>{title}</a>
+	</h3>
+	<p class="post-meta"><FormattedDate date={pubDate} /></p>
+	<p class="post-card-desc">{description}</p>
+	{
+		tags.length > 0 && (
+			<ul class="tag-list">
+				{tags.map((tag) => (
+					<li>
+						<a href={withBase(`/tags/${slugifyTag(tag)}/`)}>{tag}</a>
+					</li>
+				))}
+			</ul>
+		)
+	}
+</article>
+
+<style>
+	.post-card {
+		padding: 1.5rem 0;
+		border-bottom: 1px solid var(--border);
+	}
+	.post-card-title {
+		margin: 0;
+		font-size: 1.2rem;
+	}
+	.post-card-title a {
+		color: var(--text);
+	}
+	.post-card-title a:hover {
+		color: var(--accent);
+		text-decoration: none;
+	}
+	.post-card-desc {
+		margin: 0.5rem 0 0;
+		color: var(--text-muted);
+	}
+</style>

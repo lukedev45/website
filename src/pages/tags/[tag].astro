@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { SITE_TITLE } from '../../consts';
+import { getAllTags, getProjects, getPublishedPosts, slugifyTag } from '../../utils';
+
+export async function getStaticPaths() {
+	const [posts, projects, tags] = await Promise.all([
+		getPublishedPosts(),
+		getProjects(),
+		getAllTags(),
+	]);
+	return tags.map(({ tag, slug }) => ({
+		params: { tag: slug },
+		props: {
+			tag,
+			posts: posts.filter((post) => post.data.tags.some((t) => slugifyTag(t) === slug)),
+			projects: projects.filter((project) => project.data.tags.some((t) => slugifyTag(t) === slug)),
+		},
+	}));
+}
+
+interface Props {
+	tag: string;
+	posts: Awaited<ReturnType<typeof getPublishedPosts>>;
+	projects: Awaited<ReturnType<typeof getProjects>>;
+}
+
+const { tag, posts, projects } = Astro.props;
+const showSubheads = posts.length > 0 && projects.length > 0;
+---
+
+<BaseLayout title={`#${tag} · ${SITE_TITLE}`} description={`Posts and projects tagged “${tag}”.`}>
+	<h1>Tagged “{tag}”</h1>
+	{
+		posts.length > 0 && (
+			<section>
+				{showSubheads && <h2>Posts</h2>}
+				{posts.map((post) => (
+					<PostCard post={post} />
+				))}
+			</section>
+		)
+	}
+	{
+		projects.length > 0 && (
+			<section>
+				{showSubheads && <h2>Projects</h2>}
+				{projects.map((project) => (
+					<ProjectCard project={project} />
+				))}
+			</section>
+		)
+	}
+</BaseLayout>

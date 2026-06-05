@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { AUTHOR, SITE_TITLE } from '../consts';
+---
+
+<BaseLayout title={`About · ${SITE_TITLE}`} description={`About ${AUTHOR}.`}>
+	<article class="prose">
+		<h1>About</h1>
+		<p>
+			Hi — I’m {AUTHOR}. This is a placeholder about page. Edit it in
+			<code>src/pages/about.astro</code> with a short introduction: who you are, what you work
+			on, and what you write about here.
+		</p>
+		<p>
+			A few things worth mentioning: your current focus or role, the tools and technologies you
+			enjoy, and the kinds of problems you like to solve.
+		</p>
+		<h2>Elsewhere</h2>
+		<ul>
+			<li>Email: <a href="mailto:you@example.com">you@example.com</a></li>
+			<li>GitHub: set <code>GITHUB_URL</code> in <code>src/consts.ts</code></li>
+		</ul>
+	</article>
+</BaseLayout>

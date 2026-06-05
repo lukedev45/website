@@ -1,0 +1,44 @@
+---
+import { AUTHOR, GITHUB_URL } from '../consts';
+import { withBase } from '../utils';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="footer-inner">
+		<span>© {year} {AUTHOR}</span>
+		<span class="footer-links">
+			<a href={withBase('rss.xml')}>RSS</a>
+			{GITHUB_URL && <a href={GITHUB_URL} target="_blank" rel="noopener">GitHub</a>}
+		</span>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		border-top: 1px solid var(--border);
+		color: var(--text-muted);
+		font-size: 0.875rem;
+	}
+	.footer-inner {
+		max-width: var(--content-width);
+		margin: 0 auto;
+		padding: 1.5rem 1.25rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+	.footer-links {
+		display: flex;
+		gap: 1rem;
+	}
+	.footer-links a {
+		color: var(--text-muted);
+	}
+	.footer-links a:hover {
+		color: var(--accent);
+	}
+</style>

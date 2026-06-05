@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { slugifyTag, withBase } from '../utils';
+import { SITE_TITLE } from '../consts';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, tags } = Astro.props;
+---
+
+<BaseLayout title={`${title} · ${SITE_TITLE}`} description={description}>
+	<article class="prose">
+		<header class="post-header">
+			<h1>{title}</h1>
+			<p class="post-meta">
+				<FormattedDate date={pubDate} />
+				{updatedDate && <span> · Updated <FormattedDate date={updatedDate} /></span>}
+			</p>
+			{
+				tags && tags.length > 0 && (
+					<ul class="tag-list">
+						{tags.map((tag) => (
+							<li>
+								<a href={withBase(`/tags/${slugifyTag(tag)}/`)}>{tag}</a>
+							</li>
+						))}
+					</ul>
+				)
+			}
+		</header>
+		<slot />
+	</article>
+</BaseLayout>
+
+<style>
+	.post-header {
+		margin-bottom: 2rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--border);
+	}
+</style>
