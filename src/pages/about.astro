@@ -1,24 +1,47 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { AUTHOR, SITE_TITLE } from '../consts';
+import { AUTHOR, SITE_TITLE, GITHUB_URL } from '../consts';
 ---
 
 <BaseLayout title={`About · ${SITE_TITLE}`} description={`About ${AUTHOR}.`}>
-	<article class="prose">
-		<h1>About</h1>
-		<p>
-			Hi — I’m {AUTHOR}. This is a placeholder about page. Edit it in
-			<code>src/pages/about.astro</code> with a short introduction: who you are, what you work
-			on, and what you write about here.
-		</p>
-		<p>
-			A few things worth mentioning: your current focus or role, the tools and technologies you
-			enjoy, and the kinds of problems you like to solve.
-		</p>
-		<h2>Elsewhere</h2>
-		<ul>
-			<li>Email: <a href="mailto:you@example.com">you@example.com</a></li>
-			<li>GitHub: set <code>GITHUB_URL</code> in <code>src/consts.ts</code></li>
-		</ul>
-	</article>
+  <article class="prose">
+    <h1>About</h1>
+
+    <p>
+      I'm an applied mathematics and physics graduate from Queen's University Belfast,
+      starting an MSc in Mathematical Sciences at the University of Bristol in
+      autumn 2026, supported by the Martingale Foundation.
+    </p>
+
+    <p>
+      My focus right now is quantum error correction — specifically qLDPC codes
+      and how we decode them. I'm working through Riverlane's
+      <a href="https://github.com/riverlane/deltakit" target="_blank" rel="noopener">Deltakit</a>
+      textbook and contributing to open-source tooling: an MCP server for Qiskit
+      documentation and a genomic visualisation interface for
+      <a href="https://www.cbioportal.org" target="_blank" rel="noopener">cBioPortal</a>
+      via Google Summer of Code.
+    </p>
+
+    <p>
+      This website serves as a portfolio for past and current technical work. Opinions on this
+      site are entirely my own.
+    </p>
+
+    <h2>Things I work with</h2>
+
+    <ul>
+      <li>Python, SQL and TypeScript </li>
+      <li>Qiskit, MCP servers</li>
+      <li>C++ for numerical methods and simulation</li>
+      <li>Web: HTMX, TailwindCSS, Astro, Javascript</li>
+    </ul>
+
+    <h2>Elsewhere</h2>
+
+    <ul>
+      <li>GitHub: <a href={GITHUB_URL} target="_blank" rel="noopener">{GITHUB_URL}</a></li>
+      <li>Email: <a href="mailto:lukedevlin45@gmail.com">lukedevlin45@gmail.com</a></li>
+    </ul>
+  </article>
 </BaseLayout>
