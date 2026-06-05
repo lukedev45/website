@@ -6,7 +6,7 @@ export const SITE_DESCRIPTION =
 export const AUTHOR = 'Luke Devlin';
 
 // Used in the header/footer. Set to '' to hide the link.
-export const GITHUB_URL = 'https://github.com/lukedevlin45';
+export const GITHUB_URL = 'https://github.com/lukedev45';
 
 // Primary navigation. `href` values are root-relative; the base path
 // (for project-page deploys) is applied automatically via `withBase`.

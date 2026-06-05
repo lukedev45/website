@@ -2,7 +2,7 @@
 title: 'This website'
 description: 'A minimalist blog and portfolio built with Astro, with Markdown content, tags, RSS, and dark mode.'
 tags: ['astro', 'typescript']
-repo: 'https://github.com/lukedevlin45/my_website'
+repo: 'https://github.com/lukedev45/website'
 featured: true
 order: 1
 ---

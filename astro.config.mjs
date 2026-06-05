@@ -11,8 +11,8 @@ export default defineConfig({
 	//     site: 'https://<username>.github.io'   (leave `base` commented out)
 	// • Project page   → any other repo name:
 	//     site: 'https://<username>.github.io'   AND  base: '/<repo-name>'
-	site: 'https://lukedevlin45.github.io',
-	base: '/my_website',
+	site: 'https://lukedev45.github.io',
+	base: '/website',
 
 	integrations: [mdx(), sitemap()],
 
