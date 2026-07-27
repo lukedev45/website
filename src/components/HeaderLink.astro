@@ -16,19 +16,37 @@ const isActive = target === '/' ? current === '/' : current === target || curren
 
 <a href={withBase(target)} class:list={[className, { active: isActive }]} {...props}>
 	<slot />
+	{isActive && <span class="marker" aria-hidden="true" />}
 </a>
 
 <style>
 	a {
+		position: relative;
+		font-family: var(--font-ui);
 		color: var(--text-muted);
-		font-size: 0.95rem;
+		font-size: 0.92rem;
 	}
 	a:hover {
 		color: var(--text);
-		text-decoration: none;
 	}
 	a.active {
 		color: var(--text);
-		font-weight: 600;
+	}
+	/*
+	  Only the active link renders a marker, so the view-transition name is
+	  unique per page — which is what lets the browser slide it from the old
+	  link to the new one on navigation instead of fading one out and another in.
+	  Marking the state with a rule rather than a bolder weight also keeps the
+	  nav from reflowing as you move between pages.
+	*/
+	.marker {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: -0.45rem;
+		height: 2px;
+		border-radius: 2px;
+		background: var(--accent);
+		view-transition-name: nav-active;
 	}
 </style>

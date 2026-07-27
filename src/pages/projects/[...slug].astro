@@ -22,10 +22,10 @@ const { Content } = await render(project);
 	<article class="prose">
 		<header class="post-header">
 			<h1>{title}</h1>
-			<p class="post-meta">{description}</p>
+			<p class="entry-desc">{description}</p>
 			{
 				(repo || demo) && (
-					<p class="project-links">
+					<p class="entry-links">
 						{demo && (
 							<a href={demo} target="_blank" rel="noopener">
 								Live ↗
@@ -61,10 +61,5 @@ const { Content } = await render(project);
 		padding-bottom: 1.5rem;
 		border-bottom: 1px solid var(--border);
 	}
-	.project-links {
-		display: flex;
-		gap: 1rem;
-		margin: 0.6rem 0 0;
-		font-size: 0.95rem;
-	}
+
 </style>

@@ -1,0 +1,74 @@
+---
+/*
+  The site's one identity mark: a window onto a sparse parity-check matrix —
+  the object at the centre of the qLDPC work. Generated at build time from a
+  fixed seed, so it renders as static HTML and ships no JavaScript.
+
+  ponytail: hash-and-threshold, not a real code construction. A faithful H
+  would need hundreds of columns to look this sparse; at 24x5 the honest
+  picture is a window into a much larger matrix. Swap SEED to reroll the
+  pattern (preview them with scratchpad/parity.mjs).
+*/
+const COLS = 24;
+const ROWS = 5;
+const SEED = 4;
+
+const isCheck = (r: number, c: number) => {
+	let h = (c * 374761393 + r * 668265263 + SEED) | 0;
+	h = ((h ^ (h >>> 13)) * 1274126177) | 0;
+	return ((h ^ (h >>> 16)) >>> 0) % 9 === 0; // ~1 cell in 9 is a check
+};
+
+const cells = Array.from({ length: ROWS * COLS }, (_, i) => ({
+	col: i % COLS,
+	on: isCheck(Math.floor(i / COLS), i % COLS),
+}));
+---
+
+<!-- title, not a caption: the explanation is there for anyone curious enough to hover. -->
+<div class="parity" role="img" aria-label="A sparse parity-check matrix" title="A sparse parity-check matrix">
+	{
+		cells.map((cell) => (
+			<span
+				class:list={['cell', { on: cell.on }]}
+				style={cell.on ? `animation-delay: ${cell.col * 18}ms` : undefined}
+			/>
+		))
+	}
+</div>
+
+<style>
+	.parity {
+		display: grid;
+		grid-template-columns: repeat(24, 6px);
+		gap: 6px;
+		width: max-content;
+		margin: 1.75rem 0 0.5rem;
+	}
+	/* Zeros are a whisper; the checks are the picture. */
+	.cell {
+		width: 6px;
+		height: 6px;
+		border-radius: 1px;
+		background: var(--border);
+		opacity: 0.55;
+	}
+	/*
+	  Only the checks animate, and they land left to right — the sweep reads as
+	  the matrix being scanned rather than as decoration arriving. One shot on
+	  load, no loop: a visitor sees this once, which is where the delight budget
+	  belongs. Final state lives on the rule and the start state in the
+	  keyframe, so reduced motion (which flattens the duration) still lands here.
+	*/
+	.cell.on {
+		background: var(--accent);
+		opacity: 1;
+		animation: check-in 280ms var(--ease-out) backwards;
+	}
+	@keyframes check-in {
+		from {
+			opacity: 0;
+			transform: scale(0.6);
+		}
+	}
+</style>

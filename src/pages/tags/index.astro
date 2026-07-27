@@ -37,4 +37,10 @@ const tags = await getAllTags();
 		padding: 0.65rem 0;
 		border-bottom: 1px solid var(--border);
 	}
+	/* Counts are data — mono and tabular, like every other number on the site. */
+	.tags-index span {
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		font-variant-numeric: tabular-nums;
+	}
 </style>

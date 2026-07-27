@@ -12,14 +12,14 @@ const hasBody = (project.body?.trim().length ?? 0) > 0;
 const titleHref = hasBody ? withBase(`/projects/${project.id}/`) : (demo ?? repo);
 ---
 
-<article class="project-card">
-	<h3 class="project-card-title">
+<article class="entry">
+	<h3 class="entry-title">
 		{titleHref ? <a href={titleHref}>{title}</a> : title}
 	</h3>
-	<p class="project-card-desc">{description}</p>
+	<p class="entry-desc">{description}</p>
 	{
 		(repo || demo) && (
-			<p class="project-links">
+			<p class="entry-links">
 				{demo && (
 					<a href={demo} target="_blank" rel="noopener">
 						Live ↗
@@ -45,31 +45,3 @@ const titleHref = hasBody ? withBase(`/projects/${project.id}/`) : (demo ?? repo
 		)
 	}
 </article>
-
-<style>
-	.project-card {
-		padding: 1.5rem 0;
-		border-bottom: 1px solid var(--border);
-	}
-	.project-card-title {
-		margin: 0;
-		font-size: 1.2rem;
-	}
-	.project-card-title a {
-		color: var(--text);
-	}
-	.project-card-title a:hover {
-		color: var(--accent);
-		text-decoration: none;
-	}
-	.project-card-desc {
-		margin: 0.5rem 0 0;
-		color: var(--text-muted);
-	}
-	.project-links {
-		display: flex;
-		gap: 1rem;
-		margin: 0.6rem 0 0;
-		font-size: 0.9rem;
-	}
-</style>
